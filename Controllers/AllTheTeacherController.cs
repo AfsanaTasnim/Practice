@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Practice.DAL;
 using Practice.Models;
+using System.Threading.Tasks;
 
 namespace Practice.Controllers
 {
@@ -116,7 +117,7 @@ namespace Practice.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
+       
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -129,10 +130,11 @@ namespace Practice.Controllers
         public ActionResult ClassOneTeacher()
         {
 
-            IQueryable<AllTheTeacher> AllTheTeachers = db.AllTheTeachers
-            .Where(c => c.NameOfClass == "ClassOne");
-            var sql = AllTheTeachers.ToString();
-            return View(AllTheTeachers.ToList());
+
+           IQueryable<AllTheTeacher> AllTheTeachers = db.AllTheTeachers
+           .Where(c => c.NameOfClass.Equals("One"));
+           var sql = AllTheTeachers.ToString();
+           return View(AllTheTeachers.ToList());
 
         }
     }
